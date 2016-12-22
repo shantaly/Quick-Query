@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Quick Query</title>
+    
+    <link rel="shortcut icon" href="/static/dist/img/qqlogoS.png">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+
+    <!-- MetisMenu CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/metisMenu/dist/metisMenu.min.css') }}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/main.css') }}">
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bower_components/font-awesome/css/font-awesome.min.css') }}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+            <a class="navbar-brand" style="padding-top: 5px; padding-right: 0px">
+                <img alt="Brand" src="/static/dist/img/qqlogoL.png" height="40" width="246" >
+            </a>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a id="userIcon" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a id="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="/instructor/home"><i class="fa fa-graduation-cap fa-fw"></i> Courses</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> Profile</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"></h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="medium panel-heading">
+                        Questions
+                        <div style="float:right; margin-top:-3px;">
+                            <button data-toggle="modal" data-target="#add_question" type="button" class="btn btn-primary" style="margin-right: 5px;"><i class="fa fa-plus"></i>
+                            </button>
+                            <div class="modal fade" id="add_question" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; color:#000;">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h2 class="modal-title text-center" id="myModalLabel">Add Question</h2>
+                                        </div>
+                                        <div class="modal-body" style="max-height: 420px;overflow-y: auto;">
+                                            <form id="question-form" role="form" method="post">
+                                                <div class="row" id="radio_error" style="margin: 0px 5px 0px 5px;">
+
+                                                </div>
+                                                <div class="row" style="margin: 0px 5px 0px 5px;">
+                                                    <div id="title_error" class="form-group">
+                                                        <label class="control-label" for="question_title" style="font-size: 18px;">Question Title</label>
+                                                        <input id="question_title" name="question_title" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="margin: 0px 5px 0px 5px;">
+                                                    <div id="question_error" class="form-group">
+                                                        <label class="control-label" for="question" style="font-size: 18px;" >Question</label>
+                                                        <textarea id="question" name="question" class="form-control" rows="4"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="margin: 0px 5px 0px 5px;">
+                                                    <div id="ansA_error" class="form-group">
+                                                        <label class="control-label" for="question_ansA" style="font-size: 18px;">Answer A</label>
+                                                        <input type="radio" style="float: right; margin-top: 20px;" name="optionsRadiosInline" id="optionsRadiosInline1" value="1" >
+                                                        <textarea id="question_ansA" name="question_ansA" class="form-control" rows="2"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="margin: 0px 5px 0px 5px;">
+                                                    <div id="ansB_error" class="form-group">
+                                                        <label class="control-label" for="question_ansB" style="font-size: 18px;">Answer B</label>
+                                                        <input type="radio" style="float: right; margin-top: 20px;" name="optionsRadiosInline" id="optionsRadiosInline1" value="2" >
+                                                        <textarea id="question_ansB" name="question_ansB" class="form-control" rows="2"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="ansC" style="margin: 0px 5px 0px 5px; display: none;">
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="question_ansC" style="font-size: 18px;">Answer C</label>
+                                                        <input type="radio" style="float: right; margin-top: 20px;" name="optionsRadiosInline" id="optionsRadiosInline1" value="3" >
+                                                        <textarea id="question_ansC" name="question_ansC" class="form-control" rows="2"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="ansD" style="margin: 0px 5px 0px 5px; display: none;">
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="question_ansD" style="font-size: 18px;">Answer D</label>
+                                                        <input type="radio" style="float: right; margin-top: 20px;" name="optionsRadiosInline" id="optionsRadiosInline1" value="4" >
+                                                        <textarea id="question_ansD" name="question_ansD" class="form-control" rows="2"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="ansE" style="margin: 0px 5px 0px 5px; display: none;">
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="question_ansE" style="font-size: 18px;">Answer E</label>
+                                                        <input type="radio" style="float: right; margin-top: 20px;" name="optionsRadiosInline" id="optionsRadiosInline1" value="5" >
+                                                        <textarea id="question_ansE" name="question_ansE" class="form-control" rows="2"></textarea>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div style="float:left">
+                                                <button id="show_less" type="button" class="btn btn-danger">-</button>
+                                                <button id="show_more" type="button" class="btn btn-success">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button id="submit_question" type="button" class="btn btn-primary">Add</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="session_questions" class="list-group">
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="alert_div">
+                
+            </div>
+            <!-- /.row -->
+            <!-- /.row -->
+            <div class="row" id="modals">
+                
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ url_for('static', filename='bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{{ url_for('static', filename='bower_components/metisMenu/dist/metisMenu.min.js') }}"></script>
+
+
+    <!-- Morris Charts JavaScript -->
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{{ url_for('static', filename='dist/js/requests.js') }}"></script>
+    <script src="{{ url_for('static', filename='dist/js/main.js') }}"></script>
+
+</body>
+
+</html>
